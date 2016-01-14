@@ -1,0 +1,10 @@
+README.pdf
+README.html
+shared_test_repo/
+test/integration
+.kitchen
+coverage
+.kitchen.local.yml
+
+Gemfile.lock
+Berksfile.lock

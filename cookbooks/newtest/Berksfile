@@ -1,0 +1,10 @@
+source "https://supermarket.chef.io"
+
+
+
+metadata
+
+cookbook "os-hardening", path: "../os-hardening"
+cookbook "ssh-hardening", path: "../ssh-hardening"
+cookbook "nginx-hardening", path: "../nginx-hardening"
+cookbook "mysql-hardening", path: "../mysql-hardening"
