@@ -34,3 +34,6 @@ bash 'nginx_changes' do
   EOH
 end
 
+template '/etc/nginx/sites-available/default' do
+  source 'sitefile.erb'
+end
