@@ -42,13 +42,14 @@ bash 'pulling_drupal' do
   EOH
 end
 
+#site settings necessary for web install
 bash 'site_settings' do
   user 'root'
   cwd '/usr/share/nginx/html/drupal/sites/default/'
   code <<-EOH
     cp default.settings.php settings.php
     mkdir files
-    chmod 775 files
-    chmod 774 settings.php
+    chmod a+w files
+    chmod a+w settings.php
   EOH
 end
