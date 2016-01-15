@@ -26,14 +26,18 @@ service 'php5-fpm' do
   action :restart
 end
 
-bash 'nginx_changes' do
-  user 'root'
-  code <<-EOH
-  sudo sed -i '54,58 s/#/ /' /etc/nginx/sites-available/default
-  sudo sed -i '60,64 s/#/ /' /etc/nginx/sites-available/default
-  EOH
-end
-
 template '/etc/nginx/sites-available/default' do
   source 'sitefile.erb'
+end
+
+apt_package 'git'
+apt_package 'drush'
+
+
+bash 'pulling_drupal' do
+  user 'root'
+  cwd '/usr/share/nginx/html/'
+  code <<-EOH
+  git clone --branch 8.0.x http://git.drupal.org/project/drupal.git
+  EOH
 end
