@@ -18,7 +18,7 @@ apt_package 'php5-fpm'
 bash 'phpini_changes' do
   user 'root'
   code <<-EOH
-  sed -i 's/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/' /etc/php5/fpm/php.ini
+    sed -i 's/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/' /etc/php5/fpm/php.ini
   EOH
 end
 
@@ -32,12 +32,23 @@ end
 
 apt_package 'git'
 apt_package 'drush'
-
+package 'php5-gd'
 
 bash 'pulling_drupal' do
   user 'root'
   cwd '/usr/share/nginx/html/'
   code <<-EOH
-  git clone --branch 8.0.x http://git.drupal.org/project/drupal.git
+    git clone --branch 8.0.x http://git.drupal.org/project/drupal.git
+  EOH
+end
+
+bash 'site_settings' do
+  user 'root'
+  cwd '/usr/share/nginx/html/drupal/sites/default/'
+  code <<-EOH
+    cp default.settings.php settings.php
+    mkdir files
+    chmod 775 files
+    chmod 774 settings.php
   EOH
 end
